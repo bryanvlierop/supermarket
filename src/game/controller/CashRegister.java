@@ -32,7 +32,8 @@ public class CashRegister {
             printer.show("Je betaalt nu " + formatEuro(price) + ".");
         }
 
-        var paid = 1000;
+        var paid = askConsumerForMoney();
+
         var change = calculateChange(price, paid);
         if (change < 0)
             printer.show("Je komt geld tekort!");
@@ -40,6 +41,18 @@ public class CashRegister {
             printer.show("Je krijgt " + formatEuro(change) + " terug.");
 
         printer.show("Bedankt voor je aankoop!");
+    }
+
+    private double askConsumerForMoney() {
+        printer.showInLine("Hoeveel euries wil je neerleggen? : ");
+        var userInput = reader.askUserInput();
+        double result;
+        try {
+            result =  Double.parseDouble(userInput);
+        } catch ( Exception e) {
+            return askConsumerForMoney();
+        }
+        return result;
     }
 
     private double calculatePrice(Map<Product, Integer> shoppingList) {
