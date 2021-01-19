@@ -1,13 +1,11 @@
-package game.controller;
+package game.model;
+
 
 import game.exceptions.InsufficientCashException;
-import game.model.Product;
-import game.model.ShoppingCart;
 
 import java.util.Map;
 
 public class CashRegister {
-
     public double determinePrice(ShoppingCart s) {
         var price = calculatePrice(s.getShoppingList());
 
@@ -18,10 +16,10 @@ public class CashRegister {
         return price;
     }
 
-    public double checkout(double productCosts, double customerCash) throws Exception {
+    public double checkout(double productCosts, double customerCash) throws InsufficientCashException {
         var change = calculateChange(productCosts, customerCash);
         if (change < 0)
-            throw new Exception("Je komt geld tekort!"));
+            throw new InsufficientCashException();
         return change;
     }
 
