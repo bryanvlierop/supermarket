@@ -25,8 +25,7 @@ public class SupermarketController {
     }
 
     public void checkout(ShoppingCart cart) {
-        printer.show("Goedemiddag! Alles gelukt met de boodschappen?");
-        //TODO: user input voor bovenstaande vraag
+        printer.show("Goedemiddag!");
 
         var price = market.getRegister().determineFinalPrice(cart);
         printer.show("De boodschappen kosten totaal " + numberFormat.format(price.getPrice()));
@@ -35,7 +34,7 @@ public class SupermarketController {
         if (discount > 0)
             printer.show("U heeft hierover " + numberFormat.format(discount) + " korting ontvangen.");
 
-        double customerCash = 1;
+        double customerCash = askNumberRelatedQuestionToCostumer("Voer het bedrag dat u wilt betalen in");
         double possibleChange;
         try {
             possibleChange = market.getRegister().checkout(price.getPrice(), customerCash);
@@ -58,4 +57,19 @@ public class SupermarketController {
         market.addStock(p, amount);
     }
 
+    private double askNumberRelatedQuestionToCostumer(String question) {
+        var userInput = askQuestionToCostumer(question);
+        double result;
+        try {
+            result =  Double.parseDouble(userInput);
+        } catch ( Exception e) {
+            return askNumberRelatedQuestionToCostumer(question);
+        }
+        return result;
+    }
+
+    private String askQuestionToCostumer(String question) {
+        printer.show(question);
+        return reader.askUserInput();
+    }
 }
