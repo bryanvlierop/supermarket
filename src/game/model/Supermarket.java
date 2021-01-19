@@ -1,7 +1,5 @@
 package game.model;
 
-import game.controller.CashRegister;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,5 +30,9 @@ public class Supermarket {
     public void addStock(Product p, int amount) {
         int currentStock = productStock.getOrDefault(p, 0);
         productStock.put(p, currentStock + amount);
+    }
+
+    public CashRegister getRegister() {
+        return cashRegister;
     }
 }
