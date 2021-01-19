@@ -6,14 +6,14 @@ import game.exceptions.InsufficientCashException;
 import java.util.Map;
 
 public class CashRegister {
-    public double determinePrice(ShoppingCart s) {
+    public FinalPrice determineFinalPrice(ShoppingCart s) {
         var price = calculatePrice(s.getShoppingList());
 
         var discount = calculateDiscount(price);
         if (discount > 0)
             price -= discount;
 
-        return price;
+        return new FinalPrice(price, discount);
     }
 
     public double checkout(double productCosts, double customerCash) throws InsufficientCashException {
