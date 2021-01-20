@@ -19,6 +19,14 @@ public class Supermarket {
                 .orElse(null);
     }
 
+    public void decreaseStock(Product p) {
+        productStock.put(p, productStock.getOrDefault(p, 1) - 1);
+    }
+
+    public boolean hasStock(Product p) {
+        return productStock.getOrDefault(p, 0) > 0;
+    }
+
     public boolean buyProduct(Product p, int amount) {
         int available = productStock.getOrDefault(p, 0);
         if ((available - amount) < 0)
