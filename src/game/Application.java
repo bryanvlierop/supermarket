@@ -3,6 +3,7 @@ package game;
 import game.controller.SupermarketController;
 import game.model.Product;
 import game.model.ShoppingCart;
+import game.model.Supermarket;
 import game.view.ConsolePrinter;
 import game.view.ConsoleReader;
 
@@ -11,7 +12,10 @@ import java.util.Scanner;
 public class Application {
 
     public static void main(String[] args) {
-        SupermarketController market = new SupermarketController();
+        ConsolePrinter p = new ConsolePrinter();
+        ConsoleReader r = new ConsoleReader();
+        Supermarket albertHeijn = new Supermarket();
+        SupermarketController market = new SupermarketController(albertHeijn, r, p);
 
         market.supply(new Product("Soap", 3.00), 100);
         market.supply(new Product("Cereals", 2.50), 50);

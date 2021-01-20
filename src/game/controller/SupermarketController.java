@@ -17,11 +17,11 @@ public class SupermarketController {
 
     private final Supermarket market;
 
-    public SupermarketController() {
+    public SupermarketController(Supermarket s, ConsoleReader r, ConsolePrinter p) {
         numberFormat = NumberFormat.getCurrencyInstance(Locale.FRANCE);
-        reader = new ConsoleReader();
-        printer = new ConsolePrinter();
-        market = new Supermarket();
+        reader = r;
+        printer = p;
+        market = s;
     }
 
     public void supply(Product p, int amount) {
